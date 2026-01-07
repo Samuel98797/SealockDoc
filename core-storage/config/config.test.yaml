@@ -1,0 +1,17 @@
+database:
+  host: ""
+  port: 0
+  user: ""
+  password: ""
+  name: ""
+  ssl_mode: ""
+
+storage:
+  type: "local"
+
+redis:
+  host: ""
+  port: 0
+
+storage:
+  cache_expiry: "1h"

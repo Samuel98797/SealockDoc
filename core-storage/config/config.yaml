@@ -1,0 +1,37 @@
+# 应用配置
+# 注意：敏感配置项（如密码、密钥等）应通过环境变量设置，而不是在配置文件中硬编码
+# 以下是示例配置，生产环境请使用环境变量覆盖敏感信息
+
+# 服务器配置
+server:
+  port: 8080                    # 服务器端口号
+  read_timeout: 30              # 读取超时时间(秒)
+  write_timeout: 30             # 写入超时时间(秒)
+  mode: "debug"                 # 运行模式: debug, release, test
+
+# 数据库配置
+database:
+  host: "localhost"            # 数据库主机地址
+  port: 5432                    # 数据库端口号
+  user: "postgres"             # 数据库用户名
+  password: "postgres"         # 数据库密码 - 警告：在生产环境中必须从环境变量设置
+  name: "sealock"              # 数据库名称
+  ssl_mode: "disable"          # SSL模式
+
+# Redis配置
+redis:
+  host: "localhost"            # Redis主机地址
+  port: 6379                    # Redis端口号
+  password: ""                 # Redis密码 - 警告：在生产环境中必须从环境变量设置
+  db: 0                         # Redis数据库编号
+
+# 存储配置
+storage:
+  type: "local"                 # 存储类型: local, local-cached
+  cache_expiry: "24h"           # 缓存过期时间
+
+# 日志配置
+logging:
+  level: "info"                 # 日志级别: debug, info, warn, error
+  format: "json"                # 日志格式: json, console
+  output_path: "./logs"         # 日志输出路径
