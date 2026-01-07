@@ -126,10 +126,32 @@ go build -o sealockdoc main.go
 go run main.go
 ```
 
+> **注意**: 在Windows PowerShell中，请使用分号 `;` 连接命令：
+> ```powershell
+cd "core-storage"; go mod download; go build -o sealockdoc main.go; go run main.go
+> ```
+
 #### 配置说明
-- 数据库连接信息配置在 `config/config.yaml` 文件中
-- 支持环境变量覆盖配置项
-- 敏感信息通过环境变量注入
+- **配置文件位置**: 数据库连接等配置信息位于 `core-storage/config/config.yaml`
+- **环境变量覆盖**: 所有配置项支持通过环境变量覆盖，格式为 `CONFIG_SECTION_KEY`（例如 `DATABASE_URL`）
+- **敏感信息处理**: 密码等敏感信息禁止硬编码，应通过以下方式注入：
+  ```yaml
+database:
+  password: ${DB_PASSWORD}  # 从环境变量读取
+```
+- **配置示例**:
+  ```yaml
+database:
+  host: localhost
+  port: 5432
+  user: ${DB_USER}
+  password: ${DB_PASSWORD}
+  dbname: sealockdoc
+  sslmode: disable
+redis:
+  addr: ${REDIS_ADDR:localhost:6379}  # 冒号后为默认值
+```
+- **推荐工具**: 使用 [Viper](https://github.com/spf13/viper) 库管理配置，支持自动绑定环境变量
 
 ## 核心功能
 
